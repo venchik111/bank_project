@@ -8,15 +8,15 @@ def filter_by_state(
 
     filtered_dicts: list[dict] = []
 
-    for i in list_of_dicts:
-        if i["state"] == filter_state:
-            filtered_dicts.append(i)
+    for item in list_of_dicts:
+        if item["state"] == filter_state:
+            filtered_dicts.append(item)
 
     return filtered_dicts
 
 
 def sort_by_date(list_of_dicts: list[dict], reverse: bool = True) -> list[dict]:
-    """Сортирует список словарей по знасению ключа date"""
+    """Сортирует список словарей по значению ключа date"""
 
     def get_date_key(item):
         date_str = item.get("date")
