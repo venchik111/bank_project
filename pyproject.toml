@@ -1,5 +1,5 @@
 [project]
-name = "testproject"
+name = "bank_project"
 version = "0.1.0"
 description = ""
 authors = [
@@ -29,3 +29,6 @@ warn_return_any = true
 
 [tool.isort]
 line_length = 119
+
+[tool.poetry]
+package-mode = false
