@@ -1,13 +1,16 @@
 def get_mask_card_number(card_number: int | str) -> str:
     """Принимает на вход номер карты и возвращает ее маску"""
-    mask_card_number = (
-        str(card_number)[0:4]
-        + " "
-        + str(card_number)[4:6]
-        + "** ****"
-        + str(card_number)[-4:]
-    )
-    return mask_card_number
+    if len(str(card_number)) == 16:
+        mask_card_number = (
+            str(card_number)[0:4]
+            + " "
+            + str(card_number)[4:6]
+            + "** **** "
+            + str(card_number)[-4:]
+        )
+        return mask_card_number
+    else:
+        return "it's not card number"
 
 
 def get_mask_account(account_number: int | str) -> str:
