@@ -1,7 +1,6 @@
 import logging
 from pathlib import Path
 
-
 logs_dir = Path(__file__).resolve().parent.parent / "logs"
 logs_dir.mkdir(exist_ok=True)
 
@@ -14,9 +13,7 @@ file_handler = logging.FileHandler(
     encoding="utf-8",
 )
 
-formatter = logging.Formatter(
-    "%(asctime)s %(name)s %(levelname)s: %(message)s"
-)
+formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
 
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
