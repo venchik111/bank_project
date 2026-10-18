@@ -3,6 +3,7 @@ import logging
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 
 logs_dir = Path(__file__).resolve().parent.parent / "logs"
 logs_dir.mkdir(exist_ok=True)
@@ -16,9 +17,7 @@ file_handler = logging.FileHandler(
     encoding="utf-8",
 )
 
-formatter = logging.Formatter(
-    "%(asctime)s %(name)s %(levelname)s: %(message)s"
-)
+formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
 
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -44,3 +43,17 @@ def load_transactions(file_path: str) -> list[dict[str, Any]]:
     except json.JSONDecodeError:
         logger.error("Ошибка чтения JSON-файла")
         return []
+
+
+def load_transactions_csv(file_path: str) -> list[dict[str, Any]]:
+    """Считывает финансовые операции из CSV-файла."""
+    transactions = pd.read_csv(file_path, sep=";")
+
+    return transactions.to_dict(orient="records")
+
+
+def load_transactions_excel(file_path: str) -> list[dict[str, Any]]:
+    """Считывает финансовые операции из XLSX-файла."""
+    transactions = pd.read_excel(file_path)
+
+    return transactions.to_dict(orient="records")
