@@ -5,7 +5,6 @@ from typing import Any
 
 import pandas as pd
 
-
 logs_dir = Path(__file__).resolve().parent.parent / "logs"
 logs_dir.mkdir(exist_ok=True)
 
@@ -18,9 +17,7 @@ file_handler = logging.FileHandler(
     encoding="utf-8",
 )
 
-formatter = logging.Formatter(
-    "%(asctime)s %(name)s %(levelname)s: %(message)s"
-)
+formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s: %(message)s")
 
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -35,11 +32,7 @@ def load_transactions(file_path: str) -> list[dict[str, Any]]:
         if isinstance(transactions, list):
             logger.info("JSON-файл успешно прочитан")
 
-            return [
-                item
-                for item in transactions
-                if isinstance(item, dict) and item
-            ]
+            return [item for item in transactions if isinstance(item, dict) and item]
 
         logger.error("JSON-файл содержит не список")
         return []
@@ -62,9 +55,7 @@ def load_transactions_csv(
         sep=";",
     )
 
-    return transactions.to_dict(
-        orient="records"
-    )
+    return transactions.to_dict(orient="records")
 
 
 def load_transactions_excel(
@@ -73,6 +64,4 @@ def load_transactions_excel(
     """Считывает финансовые операции из XLSX-файла."""
     transactions = pd.read_excel(file_path)
 
-    return transactions.to_dict(
-        orient="records"
-    )
+    return transactions.to_dict(orient="records")
